@@ -19,6 +19,7 @@ const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
 function App() {
   const areaRef = useRef(null)
   const noBtnRef = useRef(null)
+  const suppressYesClickUntilRef = useRef(0)
   const [accepted, setAccepted] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
@@ -189,6 +190,10 @@ function App() {
       moveNoButton(getPointerFromEvent(event))
     }
 
+    if (noStage === 2) {
+      suppressYesClickUntilRef.current = performance.now() + 500
+    }
+
     setNoHoverCount(0)
     setNoStage((currentStage) => Math.min(currentStage + 1, 3))
   }
@@ -207,6 +212,10 @@ function App() {
   }
 
   const handleYesClick = () => {
+    if (performance.now() < suppressYesClickUntilRef.current) {
+      return
+    }
+
     setAccepted(true)
     setIsModalOpen(true)
   }
