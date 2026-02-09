@@ -1,4 +1,4 @@
-const makePlaceholder = (label) =>
+﻿const makePlaceholder = (label) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
       <rect width="800" height="500" fill="#ffe7f1"/>
@@ -6,7 +6,9 @@ const makePlaceholder = (label) =>
     </svg>`
   )}`
 
+const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
+
 export const LEFT_PLACEHOLDER = makePlaceholder('Funny valentine image')
 export const RIGHT_PLACEHOLDER = makePlaceholder('Cute valentine image')
 export const POPUP_PLACEHOLDER = makePlaceholder('Popup valentine image')
-export const POPUP_IMAGE_SRC = '/images/popup_img.png'
+export const POPUP_IMAGE_SRC = withBase('images/popup_img.png')

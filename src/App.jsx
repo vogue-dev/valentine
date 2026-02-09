@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import ActionButtons from './components/ActionButtons'
 import CelebrationLayer from './components/CelebrationLayer'
@@ -14,6 +14,7 @@ import {
 
 const CURSOR_SAFE_GAP_X = 70
 const CURSOR_SAFE_GAP_Y = 50
+const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
 
 function App() {
   const areaRef = useRef(null)
@@ -24,8 +25,8 @@ function App() {
   const [noHoverCount, setNoHoverCount] = useState(0)
   const [noStage, setNoStage] = useState(0)
   const popupImageSrc = usePreloadedImage(POPUP_IMAGE_SRC, POPUP_PLACEHOLDER)
-  const leftImageSrc = usePreloadedImage('/images/left_img.png', LEFT_PLACEHOLDER)
-  const rightImageSrc = usePreloadedImage('/images/right_img.png', RIGHT_PLACEHOLDER)
+  const leftImageSrc = usePreloadedImage(withBase('images/left_img.png'), LEFT_PLACEHOLDER)
+  const rightImageSrc = usePreloadedImage(withBase('images/right_img.png'), RIGHT_PLACEHOLDER)
   const requiredHoverCount = 5
   const canClickNo = noStage < 3 && noHoverCount >= requiredHoverCount
   const isNoTiny = noStage >= 2
