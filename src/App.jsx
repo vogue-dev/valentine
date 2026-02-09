@@ -167,22 +167,30 @@ function App() {
     }
   }
 
-  const handleNoTouchStart = (event) => {
-    if (isFinalNoStage) {
+  const handleNoPointerDown = (event) => {
+    if (event.pointerType !== 'touch' && event.pointerType !== 'pen') {
       return
     }
 
-    if (canClickNo) {
+    if (isFinalNoStage || canClickNo) {
       return
     }
 
     const nextCount = noHoverCount + 1
-    setNoHoverCount(nextCount)
+    event.preventDefault()
 
     if (nextCount < requiredHoverCount) {
-      event.preventDefault()
+      setNoHoverCount(nextCount)
+      moveNoButton(getPointerFromEvent(event))
+      return
+    }
+
+    if (noStage < 2) {
       moveNoButton(getPointerFromEvent(event))
     }
+
+    setNoHoverCount(0)
+    setNoStage((currentStage) => Math.min(currentStage + 1, 3))
   }
 
   const handleNoClick = (event) => {
@@ -237,7 +245,7 @@ function App() {
           isYesFullscreen={isFinalNoStage}
           onYesClick={handleYesClick}
           onNoMouseEnter={handleNoMouseEnter}
-          onNoTouchStart={handleNoTouchStart}
+          onNoPointerDown={handleNoPointerDown}
           onNoClick={handleNoClick}
         />
 
