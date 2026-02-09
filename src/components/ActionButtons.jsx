@@ -10,7 +10,7 @@ function ActionButtons({
   isYesFullscreen,
   onYesClick,
   onNoMouseEnter,
-  onNoTouchStart,
+  onNoPointerDown,
   onNoClick,
 }) {
   const buttonsClassName = `buttons${isYesFullscreen ? ' buttons-final-stage' : ''}`
@@ -28,7 +28,7 @@ function ActionButtons({
         type="button"
         style={{ left: `${noPosition.x}px`, top: `${noPosition.y}px` }}
         onMouseEnter={onNoMouseEnter}
-        onTouchStart={onNoTouchStart}
+        onPointerDown={onNoPointerDown}
         onFocus={onNoMouseEnter}
         onClick={onNoClick}
       >
