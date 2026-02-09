@@ -91,6 +91,7 @@ h1 {
 .btn-yes {
   left: 28%;
   top: 50%;
+  z-index: 1;
   transform: translate(-50%, -50%) scale(1);
   background: var(--yes);
   color: #fff;
@@ -108,11 +109,33 @@ h1 {
 }
 
 .btn-no {
-  background: var(--no);
+  z-index: 2;
+  border: 2px solid #6f6f6f;
+  background: linear-gradient(135deg, #9b9b9b 0%, #8e8e8e 45%, #7b7b7b 100%);
+  background-size: 180% 180%;
   color: #fff;
   font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   padding: 10px 24px;
-  transition: left 0.22s ease-out, top 0.22s ease-out, transform 0.12s ease, background-color 0.2s ease;
+  transition:
+    left 0.22s ease-out,
+    top 0.22s ease-out,
+    transform 0.12s ease,
+    background-position 0.24s ease,
+    border-color 0.2s ease,
+    box-shadow 0.24s ease,
+    filter 0.24s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-no:hover,
+  .btn-no:focus-visible {
+    border-color: #5f5f5f;
+    background-position: 100% 50%;
+    box-shadow: 0 8px 16px rgba(28, 28, 28, 0.32);
+    filter: brightness(0.82) saturate(0.9);
+  }
 }
 
 .btn-no-dimmed {
@@ -269,6 +292,7 @@ h1 {
     opacity: 0.88;
   }
 }
+
 
 @media (max-width: 640px) {
   .card {

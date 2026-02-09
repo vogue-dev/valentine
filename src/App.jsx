@@ -32,7 +32,7 @@ function App() {
   const canClickNo = noStage < 3 && noHoverCount >= requiredHoverCount
   const isNoTiny = noStage >= 2
   const isFinalNoStage = noStage >= 3
-  const noText = noStage >= 2 ? 'U SURE? FINNALY, NO?' : noStage >= 1 ? 'REALY NO?' : 'No'
+  const noText = noStage >= 2 ? 'Are you sure? Final no?' : noStage >= 1 ? 'Really no?' : 'No'
   const yesText = isFinalNoStage ? 'YES, NO WAY :)' : 'Yes'
 
   useEffect(() => {
@@ -202,6 +202,8 @@ function App() {
     if (!canClickNo || isFinalNoStage) {
       return
     }
+
+    suppressYesClickUntilRef.current = performance.now() + 250
 
     if (noStage < 2) {
       moveNoButton(getPointerFromEvent(event))
