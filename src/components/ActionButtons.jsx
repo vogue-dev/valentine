@@ -20,7 +20,14 @@ function ActionButtons({
   return (
     <div className={buttonsClassName} ref={areaRef}>
       <button className={yesClassName} type="button" onClick={onYesClick}>
-        {yesText}
+        {isYesFullscreen ? (
+          <>
+            <span className="btn-yes-main-text">{yesText}</span>
+            <span className="btn-yes-sub-text">( click on me )</span>
+          </>
+        ) : (
+          yesText
+        )}
       </button>
       <button
         className={noClassName}
